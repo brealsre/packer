@@ -25,7 +25,8 @@ $sp.ApplicationId
 Get-AzSubscription
 ```
 ### Build the Packer Image
+```bash
 ./packer build windows.json
-
+```
 ## Convert this to Terraform and Azure Secrets Engine for Dynamic Service Prinicpal creation
 
