@@ -14,7 +14,7 @@
       "subscription_id": "{{ user `azure_subscription_id` }}",
   
       "managed_image_resource_group_name": "myPackerGroup",
-      "managed_image_name": "WindowsServer2016Image_{{isotime \"2006-01-02_03_04_05\"}}",
+      "managed_image_name": "WindowsServer2016Image_{{isotime \"2006-01-02-03-04-05\"}}",
   
       "os_type": "Windows",
       "image_publisher": "MicrosoftWindowsServer",

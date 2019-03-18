@@ -4,7 +4,8 @@
 ## Windows
 ### Windows on Azure
   - Using Existing Template
-  - Building from ISO
+    windows_azure.json
+
 ### Windows on VMware
 ### Windows on AWS
 
