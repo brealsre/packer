@@ -1,0 +1,62 @@
+{
+  "variables": {
+    "vcenter_host": "vc.lab.local",
+    "vcenter_user": "administrator@vsphere.local",
+    "vcenter_password": "",
+    "ssh_user": "vagrant",
+    "ssh_password": "vagrant",
+    "dc": "Lab",
+    "cluster": "Local",
+    "network": "Servers",
+    "storage": "iSCSI1",
+    "iso_path": "iso",
+    "vmname": "centos7_base_image",
+    "ks_file": "ks.cfg",
+    "cpu_cores": "1",
+    "ram_mb": "1024",
+    "disk_size": "32768"
+  },
+
+  "builders": [
+	{
+      "type": "vsphere-iso",
+
+      "vcenter_server":      "{{ user `vcenter_host` }}",
+      "username":            "{{ user `vcenter_user` }}",
+      "password":            "{{ user `vcenter_password` }}",
+      "insecure_connection": "true",
+      "ssh_username": "{{ user `ssh_user` }}",
+      "ssh_password": "{{ user `ssh_password` }}",
+
+      "datacenter": "{{ user `dc` }}",
+      "cluster": "{{ user `cluster` }}",
+      "network": "{{ user `network` }}",
+      "network_card": "vmxnet3",
+      "datastore": "{{ user `storage` }}",
+      "vm_name": "{{ user `vmname` }}_{{isotime \"2006-01-02\"}}",
+      "guest_os_type": "rhel7_64Guest",
+
+      "CPUs":             "{{ user `cpu_cores` }}",
+      "RAM":              "{{ user `ram_mb` }}",
+      "RAM_reserve_all": true,
+      "CPU_limit": -1,
+      "disk_controller_type":  "pvscsi",
+      "disk_size":        "{{ user `disk_size` }}",
+      "disk_thin_provisioned": true,
+      "folder": "{{ user `template_dir` }}",
+	  
+	  "floppy_files": [
+        "{{template_dir}}/ks.cfg"
+		],
+	   "iso_paths": [
+        "[iSCSI1] iso/CentOS-7-x86_64-DVD-1804.iso"
+      ],
+	   "boot_command": [
+        "<tab> text ks=hd:fd0:/ks.cfg<enter><wait>"
+      ],
+      "boot_order": "disk,cdrom",
+      "convert_to_template": true
+    }
+	
+  ]
+}
