@@ -1,7 +1,5 @@
+# Packer Image Creation: Examples and Lab
 [![Build status](https://dev.azure.com/GabrielMaentz/WindowsImageCreation/_apis/build/status/Packer-ImageCreation-Windows-CI)](https://dev.azure.com/GabrielMaentz/WindowsImageCreation/_build/latest?definitionId=2)
-
-# packer
-Packer Image Creation 
 
 ## Windows
 ### Windows on Azure
