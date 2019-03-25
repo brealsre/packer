@@ -1,0 +1,543 @@
+Gabes-AirRPT:packer-windows gabe$ packer build -only=virtualbox-iso windows_10.json
+virtualbox-iso output will be in this color.
+
+==> virtualbox-iso: Retrieving ISO
+    virtualbox-iso: Found already downloaded, initial checksum matched, no download needed: https://software-download.microsoft.com/download/sg/17763.107.101029-1455.rs5_release_svc_refresh_CLIENTENTERPRISEEVAL_OEMRET_x64FRE_en-us.iso
+==> virtualbox-iso: Creating floppy disk...
+    virtualbox-iso: Copying files flatly from floppy_files
+    virtualbox-iso: Copying file: ./answer_files/10/Autounattend.xml
+    virtualbox-iso: Copying file: ./floppy/WindowsPowershell.lnk
+    virtualbox-iso: Copying file: ./floppy/PinTo10.exe
+    virtualbox-iso: Copying file: ./scripts/fixnetwork.ps1
+    virtualbox-iso: Copying file: ./scripts/disable-screensaver.ps1
+    virtualbox-iso: Copying file: ./scripts/disable-winrm.ps1
+    virtualbox-iso: Copying file: ./scripts/enable-winrm.ps1
+    virtualbox-iso: Copying file: ./scripts/microsoft-updates.bat
+    virtualbox-iso: Copying file: ./scripts/win-updates.ps1
+    virtualbox-iso: Done copying files from floppy_files
+    virtualbox-iso: Collecting paths from floppy_dirs
+    virtualbox-iso: Resulting paths from floppy_dirs : []
+    virtualbox-iso: Done copying paths from floppy_dirs
+==> virtualbox-iso: Creating virtual machine...
+==> virtualbox-iso: Creating hard drive...
+==> virtualbox-iso: Attaching floppy disk...
+==> virtualbox-iso: Creating forwarded port mapping for communicator (SSH, WinRM, etc) (host port 2292)
+==> virtualbox-iso: Starting the virtual machine...
+==> virtualbox-iso: Waiting 6m0s for boot...
+==> virtualbox-iso: Typing the boot command...
+==> virtualbox-iso: Using winrm communicator to connect: 127.0.0.1
+==> virtualbox-iso: Waiting for WinRM to become available...
+    virtualbox-iso: WinRM connected.
+    virtualbox-iso: #< CLIXML
+    virtualbox-iso: <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj><Obj S="progress" RefId="1"><TNRef RefId="0" /><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+==> virtualbox-iso: Connected to WinRM!
+==> virtualbox-iso: Uploading VirtualBox version info (5.2.22)
+==> virtualbox-iso: Provisioning with windows-shell...
+==> virtualbox-iso: Provisioning with shell script: ./scripts/vm-guest-tools.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\7z920-x64.msi" (powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://www.7-zip.org/a/7z920-x64.msi', 'C:\Windows\Temp\7z920-x64.msi')"  0<NUL )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\7z920-x64.msi" (powershell -Command "Start-Sleep 5 ; (New-Object System.Net.WebClient).DownloadFile('https://www.7-zip.org/a/7z920-x64.msi', 'C:\Windows\Temp\7z920-x64.msi')"  0<NUL )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>msiexec /qb /i C:\Windows\Temp\7z920-x64.msi
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if "virtualbox-iso" EQU "vmware-iso" goto :vmware
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if "virtualbox-iso" EQU "virtualbox-iso" goto :virtualbox
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if exist "C:\Users\vagrant\VBoxGuestAdditions.iso" (move /Y C:\Users\vagrant\VBoxGuestAdditions.iso C:\Windows\Temp )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\VBoxGuestAdditions.iso" (powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://download.virtualbox.org/virtualbox/5.2.26/VBoxGuestAdditions_5.2.26.iso', 'C:\Windows\Temp\VBoxGuestAdditions.iso')"  0<NUL )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\VBoxGuestAdditions.iso -oC:\Windows\Temp\virtualbox"
+    virtualbox-iso:
+    virtualbox-iso: 7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+    virtualbox-iso:
+    virtualbox-iso: Processing archive: C:\Windows\Temp\VBoxGuestAdditions.iso
+    virtualbox-iso:
+    virtualbox-iso: Extracting  32Bit
+    virtualbox-iso: Extracting  32Bit\Readme.txt
+    virtualbox-iso: Extracting  64Bit
+    virtualbox-iso: Extracting  64Bit\Readme.txt
+    virtualbox-iso: Extracting  AUTORUN.INF
+    virtualbox-iso: Extracting  OS2
+    virtualbox-iso: Extracting  OS2\VBoxControl.exe
+    virtualbox-iso: Extracting  OS2\VBoxGuest.sys
+    virtualbox-iso: Extracting  OS2\VBoxReplaceDll.exe
+    virtualbox-iso: Extracting  OS2\VBoxService.exe
+    virtualbox-iso: Extracting  OS2\gengradd.dll
+    virtualbox-iso: Extracting  OS2\libc06.dll
+    virtualbox-iso: Extracting  OS2\libc061.dll
+    virtualbox-iso: Extracting  OS2\libc062.dll
+    virtualbox-iso: Extracting  OS2\libc063.dll
+    virtualbox-iso: Extracting  OS2\libc064.dll
+    virtualbox-iso: Extracting  OS2\libc065.dll
+    virtualbox-iso: Extracting  OS2\libc066.dll
+    virtualbox-iso: Extracting  OS2\readme.txt
+    virtualbox-iso: Extracting  OS2\vboxmouse.sys
+    virtualbox-iso: Extracting  VBoxLinuxAdditions.run
+    virtualbox-iso: Extracting  VBoxSolarisAdditions.pkg
+    virtualbox-iso: Extracting  VBoxWindowsAdditions.exe
+    virtualbox-iso: Extracting  VBoxWindowsAdditions-amd64.exe
+    virtualbox-iso: Extracting  VBoxWindowsAdditions-x86.exe
+    virtualbox-iso: Extracting  autorun.sh
+    virtualbox-iso: Extracting  cert
+    virtualbox-iso: Extracting  cert\VBoxCertUtil.exe
+    virtualbox-iso: Extracting  cert\vbox-sha1.cer
+    virtualbox-iso: Extracting  cert\vbox-sha256.cer
+    virtualbox-iso: Extracting  runasroot.sh
+    virtualbox-iso:
+    virtualbox-iso: Everything is Ok
+    virtualbox-iso:
+    virtualbox-iso: Folders: 4
+    virtualbox-iso: Files: 27
+    virtualbox-iso: Size:       58016270
+    virtualbox-iso: Compressed: 58433536
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>certutil -addstore -f "TrustedPublisher" C:\Windows\Temp\virtualbox\cert\vbox-sha256.cer
+    virtualbox-iso: TrustedPublisher "Trusted Publishers"
+    virtualbox-iso: Certificate "Oracle Corporation" added to store.
+    virtualbox-iso: CertUtil: -addstore command completed successfully.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>certutil -addstore -f "TrustedPublisher" C:\Windows\Temp\virtualbox\cert\vbox-sha1.cer
+    virtualbox-iso: TrustedPublisher "Trusted Publishers"
+    virtualbox-iso: Certificate "Oracle Corporation" added to store.
+    virtualbox-iso: CertUtil: -addstore command completed successfully.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>cmd /c C:\Windows\Temp\virtualbox\VBoxWindowsAdditions.exe /S
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rd /S /Q "C:\Windows\Temp\virtualbox"
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>goto :done
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>msiexec /qb /x C:\Windows\Temp\7z920-x64.msi
+==> virtualbox-iso: Provisioning with shell script: ./scripts/enable-rdp.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>netsh advfirewall firewall add rule name="Open Port 3389" dir=in action=allow protocol=TCP localport=3389
+    virtualbox-iso: Ok.
+    virtualbox-iso:
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+    virtualbox-iso: The operation completed successfully.
+==> virtualbox-iso: Provisioning with Powershell...
+==> virtualbox-iso: Provisioning with powershell script: ./scripts/debloat-windows.ps1
+    virtualbox-iso: Downloading debloat zip
+    virtualbox-iso: Disable Windows Defender
+    virtualbox-iso: Trying to disable scheduled task Windows Defender Cache Maintenance
+    virtualbox-iso:
+    virtualbox-iso: TaskPath                                       TaskName                          State
+    virtualbox-iso: --------                                       --------                          -----
+    virtualbox-iso: \Microsoft\Windows\Windows Defender\           Windows Defender Cache Mainten... Disabled
+    virtualbox-iso: Trying to disable scheduled task Windows Defender Cleanup
+    virtualbox-iso: \Microsoft\Windows\Windows Defender\           Windows Defender Cleanup          Disabled
+    virtualbox-iso: Trying to disable scheduled task Windows Defender Scheduled Scan
+    virtualbox-iso: \Microsoft\Windows\Windows Defender\           Windows Defender Scheduled Scan   Disabled
+    virtualbox-iso: Trying to disable scheduled task Windows Defender Verification
+    virtualbox-iso: \Microsoft\Windows\Windows Defender\           Windows Defender Verification     Disabled
+    virtualbox-iso: Disabling Windows Defender via Group Policies
+    virtualbox-iso:
+    virtualbox-iso: Property      : {}
+    virtualbox-iso: PSPath        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows
+    virtualbox-iso:                 Defender\Real-Time Protection
+    virtualbox-iso: PSParentPath  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows
+    virtualbox-iso:                 Defender
+    virtualbox-iso: PSChildName   : Real-Time Protection
+    virtualbox-iso: PSDrive       : HKLM
+    virtualbox-iso: PSProvider    : Microsoft.PowerShell.Core\Registry
+    virtualbox-iso: PSIsContainer : True
+    virtualbox-iso: SubKeyCount   : 0
+    virtualbox-iso: View          : Default
+    virtualbox-iso: Handle        : Microsoft.Win32.SafeHandles.SafeRegistryHandle
+    virtualbox-iso: ValueCount    : 0
+    virtualbox-iso: Name          : HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows Defender\Real-Time Protection
+    virtualbox-iso:
+    virtualbox-iso: Removing Windows Defender context menu item
+    virtualbox-iso: Optimize Windows Update
+    virtualbox-iso: Disable automatic download and installation of Windows updates
+    virtualbox-iso:
+    virtualbox-iso: Property      : {}
+    virtualbox-iso: PSPath        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\
+    virtualbox-iso:                 WindowsUpdate\AU
+    virtualbox-iso: PSParentPath  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\
+    virtualbox-iso:                 WindowsUpdate
+    virtualbox-iso: PSChildName   : AU
+    virtualbox-iso: PSDrive       : HKLM
+    virtualbox-iso: PSProvider    : Microsoft.PowerShell.Core\Registry
+    virtualbox-iso: PSIsContainer : True
+    virtualbox-iso: SubKeyCount   : 0
+    virtualbox-iso: View          : Default
+    virtualbox-iso: Handle        : Microsoft.Win32.SafeHandles.SafeRegistryHandle
+    virtualbox-iso: ValueCount    : 0
+    virtualbox-iso: Name          : HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Policies\Microsoft\Windows\WindowsUpdate\AU
+    virtualbox-iso:
+    virtualbox-iso: Disable seeding of updates to other computers via Group Policies
+    virtualbox-iso:
+    virtualbox-iso: Property      : {}
+    virtualbox-iso: PSPath        : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOpti
+    virtualbox-iso:                 mization
+    virtualbox-iso: PSParentPath  : Microsoft.PowerShell.Core\Registry::HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows
+    virtualbox-iso: PSChildName   : DeliveryOptimization
+    virtualbox-iso: PSDrive       : HKLM
+    virtualbox-iso: PSProvider    : Microsoft.PowerShell.Core\Registry
+    virtualbox-iso: PSIsContainer : True
+    virtualbox-iso: SubKeyCount   : 0
+    virtualbox-iso: View          : Default
+    virtualbox-iso: Handle        : Microsoft.Win32.SafeHandles.SafeRegistryHandle
+    virtualbox-iso: ValueCount    : 0
+    virtualbox-iso: Name          : HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization
+    virtualbox-iso:
+    virtualbox-iso: Disable 'Updates are available' message
+    virtualbox-iso:
+    virtualbox-iso: SUCCESS: The file (or folder): "C:\Windows\System32\MusNotification.exe" now owned by user "VAGRANT-10\vagrant".
+    virtualbox-iso: processed file: C:\Windows\System32\MusNotification.exe
+    virtualbox-iso: Successfully processed 1 files; Failed processing 0 files
+    virtualbox-iso:
+    virtualbox-iso: SUCCESS: The file (or folder): "C:\Windows\System32\MusNotificationUx.exe" now owned by user "VAGRANT-10\vagrant".
+    virtualbox-iso: processed file: C:\Windows\System32\MusNotificationUx.exe
+    virtualbox-iso: Successfully processed 1 files; Failed processing 0 files
+==> virtualbox-iso: Restarting Machine
+==> virtualbox-iso: Waiting for machine to restart...
+    virtualbox-iso: A system shutdown is in progress.(1115)
+    virtualbox-iso: #< CLIXML
+    virtualbox-iso: VAGRANT-10 restarted.
+    virtualbox-iso: <Objs Version="1.1.0.1" xmlns="http://schemas.microsoft.com/powershell/2004/04"><Obj S="progress" RefId="0"><TN RefId="0"><T>System.Management.Automation.PSCustomObject</T><T>System.Object</T></TN><MS><I64 N="SourceId">1</I64><PR N="Record"><AV>Preparing modules for first use.</AV><AI>0</AI><Nil /><PI>-1</PI><PC>-1</PC><T>Completed</T><SR>-1</SR><SD> </SD></PR></MS></Obj></Objs>
+==> virtualbox-iso: Machine successfully restarted, moving on
+==> virtualbox-iso: Provisioning with Powershell...
+==> virtualbox-iso: Provisioning with powershell script: ./scripts/set-powerplan.ps1
+    virtualbox-iso: Set power plan to high performance
+    virtualbox-iso: WARNING: Unable to set power plan to high performance
+    virtualbox-iso: WARNING: Error: HighPerf is null
+==> virtualbox-iso: Provisioning with powershell script: ./scripts/docker/disable-windows-defender.ps1
+    virtualbox-iso: Set-MpPreference : Operation failed with the following error: 0x800106ba. Operation: Set-MpPreference. Target:
+    virtualbox-iso: DisableRealtimeMonitoring.
+    virtualbox-iso: At C:\Windows\Temp\script-5c926384-c594-c325-30a1-3394a09319d0.ps1:1 char:1
+    virtualbox-iso: + Set-MpPreference -DisableRealtimeMonitoring $true
+    virtualbox-iso: + ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    virtualbox-iso:     + CategoryInfo          : NotSpecified: (MSFT_MpPreference:root\Microsoft\...FT_MpPreference) [Set-MpPreference],
+    virtualbox-iso:    CimException
+    virtualbox-iso:     + FullyQualifiedErrorId : HRESULT 0x800106ba,Set-MpPreference
+    virtualbox-iso:
+==> virtualbox-iso: Provisioning with windows-shell...
+==> virtualbox-iso: Provisioning with shell script: ./scripts/pin-powershell.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem https://connect.microsoft.com/PowerShell/feedback/details/1609288/pin-to-taskbar-no-longer-working-in-windows-10
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>copy "A:\WindowsPowerShell.lnk" "C:\Users\vagrant\AppData\Local\Temp\Windows PowerShell.lnk"
+    virtualbox-iso:         1 file(s) copied.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>A:\PinTo10.exe /PTFOL01:'C:\Users\vagrant\AppData\Local\Temp' /PTFILE01:'Windows PowerShell.lnk'
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>exit /b 0
+==> virtualbox-iso: Provisioning with shell script: ./scripts/compile-dotnet-assemblies.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if "AMD64" == "AMD64" goto 64BIT
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>C:\Windows\microsoft.net\framework\v4.0.30319\ngen.exe update /force /queue  1>NUL
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>C:\Windows\microsoft.net\framework64\v4.0.30319\ngen.exe update /force /queue  1>NUL
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>C:\Windows\microsoft.net\framework\v4.0.30319\ngen.exe executequeueditems  1>NUL
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>C:\Windows\microsoft.net\framework64\v4.0.30319\ngen.exe executequeueditems  1>NUL
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>exit 0
+==> virtualbox-iso: Provisioning with shell script: ./scripts/set-winrm-automatic.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>echo Set WinRM start type to auto
+    virtualbox-iso: Set WinRM start type to auto
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>sc config winrm start= auto
+    virtualbox-iso: [SC] ChangeServiceConfig SUCCESS
+==> virtualbox-iso: Provisioning with shell script: ./scripts/uac-enable.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /f /v EnableLUA /t REG_DWORD /d 1
+    virtualbox-iso: The operation completed successfully.
+==> virtualbox-iso: Provisioning with shell script: ./scripts/dis-updates.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem http://www.windows-commandline.com/disable-automatic-updates-command-line/
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" /v AUOptions /t REG_DWORD /d 1 /f
+    virtualbox-iso: The operation completed successfully.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem remove optional WSUS server settings
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate" /f
+    virtualbox-iso: The operation completed successfully.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem even harder, disable windows update service
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem sc config wuauserv start= disabled
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rem net stop wuauserv
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>set logfile=C:\Windows\Temp\win-updates.log
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if exist C:\Windows\Temp\win-updates.log (
+    virtualbox-iso: echo Show Windows Updates log file C:\Windows\Temp\win-updates.log
+    virtualbox-iso:  dir C:\Windows\Temp\win-updates.log
+    virtualbox-iso:  type C:\Windows\Temp\win-updates.log
+    virtualbox-iso:  rem output of type command is not fully shown in packer/ssh session, so try PowerShell
+    virtualbox-iso:  rem but it will hang if log file is about 22 KByte
+    virtualbox-iso:  rem powershell -command "Get-Content C:\Windows\Temp\win-updates.log"
+    virtualbox-iso:  echo End of Windows Updates log file C:\Windows\Temp\win-updates.log
+    virtualbox-iso: )
+==> virtualbox-iso: Provisioning with shell script: ./scripts/compact.bat
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if "virtua" == "hyperv" (
+    virtualbox-iso: echo "Skip compact steps in Hyper-V build."
+    virtualbox-iso:  goto :eof
+    virtualbox-iso: )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\7z920-x64.msi" (powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://www.7-zip.org/a/7z920-x64.msi', 'C:\Windows\Temp\7z920-x64.msi')"  0<NUL )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>msiexec /qb /i C:\Windows\Temp\7z920-x64.msi
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\ultradefrag.zip" (powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://downloads.sourceforge.net/project/ultradefrag/stable-release/6.1.0/ultradefrag-portable-6.1.0.bin.amd64.zip', 'C:\Windows\Temp\ultradefrag.zip')"  0<NUL )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\ultradefrag-portable-6.1.0.amd64\udefrag.exe" (cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\ultradefrag.zip -oC:\Windows\Temp" )
+    virtualbox-iso:
+    virtualbox-iso: 7-Zip [64] 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+    virtualbox-iso:
+    virtualbox-iso: Processing archive: C:\Windows\Temp\ultradefrag.zip
+    virtualbox-iso:
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\About.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Analysis.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\bc_s.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\bdwn.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\BestPractice.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Blank.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Boot.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\BootTimeScan.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\BootTimeScript.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\closed.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Compressed.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Console.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Credits.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Credits.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\custom_doxygen.css
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Defragment.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Development.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Directory.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\doxygen.css
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\dynsections.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\FAQ.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\FDL.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\fixed.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Fragmented.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\FreeSpace.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2blank.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2cl.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2doc.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2folderclosed.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2folderopen.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2lastnode.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2link.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2mlastnode.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2mnode.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2mo.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2node.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2ns.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2plastnode.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2pnode.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2splitbar.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\ftv2vertline.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\FullOptimize.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\GPL.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\GUI.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Help.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\index.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Installation.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Introduction.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\jquery.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\LGPL_2_0.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\LGPL_3_0.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\MFTzone.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\navtree.css
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\navtree.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\navtreeindex0.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\nav_f.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\nav_g.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\nav_h.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\NotFragmented.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\open.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\OptimizeMFT.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Options.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\pages.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Pause.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\QuickOptimize.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\removable.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Repeat.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Report.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Reports.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\resize.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Schedule.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\sflogo.gif
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Stop.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\sync_off.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\sync_on.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\System.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\tabs.css
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\tab_a.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\tab_b.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\tab_h.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\tab_s.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Tips.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\Troubleshooting.html
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\udefrag80x15-colored-light.gif
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\handbook\UnusedBlock.png
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\hibernate4win.exe
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\HISTORY.TXT
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Albanian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Arabic.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Armenian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Belarusian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Bengali.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Bosnian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Bulgarian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Burmese (Padauk).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Catalan.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Chinese (Simplified).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Chinese (Traditional).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Croatian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Czech.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Danish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Dutch.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\English (GB).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\English (US).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Estonian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Farsi.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Filipino (Tagalog).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Finnish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\French.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Galician.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Georgian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\German.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Greek.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Hebrew.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Hindi.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Hungarian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Icelandic.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Iloko.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Indonesian (Bahasa Indonesia).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Indonesian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Italian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Japanese.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Javanese.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Kapampangan.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Korean.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Latin.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Latvian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Lithuanian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Macedonian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Malay.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Norwegian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Polish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Portuguese (BR).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Portuguese.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Romanian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Russian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Serbian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Slovak.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Slovenian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Spanish (AR).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Spanish (ES).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Spanish (MEX).lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Swedish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Tamil.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Thai.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\translation.template
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Turkish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Ukrainian.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Vietnamese.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Waray-Waray.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\i18n\Yiddish.lng
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\lua5.1a.dll
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\lua5.1a.exe
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\lua5.1a_gui.exe
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\options
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\options.lua
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\options\readme.txt
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\README.TXT
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\scripts
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\scripts\udreport.css
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\scripts\udreportcnv.lua
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\scripts\udsorting.js
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\scripts\upgrade-options.lua
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\udefrag.dll
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\udefrag.exe
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\ultradefrag.exe
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\wgx.dll
+    virtualbox-iso: Extracting  ultradefrag-portable-6.1.0.amd64\zenwinx.dll
+    virtualbox-iso:
+    virtualbox-iso: Everything is Ok
+    virtualbox-iso:
+    virtualbox-iso: Folders: 5
+    virtualbox-iso: Files: 166
+    virtualbox-iso: Size:       2433004
+    virtualbox-iso: Compressed: 768893
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\SDelete.zip" (
+    virtualbox-iso: powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://download.sysinternals.com/files/SDelete.zip', 'C:\Windows\Temp\SDelete.zip')"  0<NUL
+    virtualbox-iso:  powershell -Command "(New-Object System.Net.WebClient).DownloadFile('https://vagrantboxes.blob.core.windows.net/box/sdelete/v1.6.1/sdelete.exe', 'C:\Windows\Temp\sdelete.exe')"  0<NUL
+    virtualbox-iso: )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if not exist "C:\Windows\Temp\sdelete.exe" (cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\SDelete.zip -oC:\Windows\Temp" )
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>msiexec /qb /x C:\Windows\Temp\7z920-x64.msi
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>net stop wuauserv
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>rmdir /S /Q C:\Windows\SoftwareDistribution\Download
+    virtualbox-iso: The Windows Update service is not started.
+    virtualbox-iso:
+    virtualbox-iso:
+    virtualbox-iso: More help is available by typing NET HELPMSG 3521.
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>mkdir C:\Windows\SoftwareDistribution\Download
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>net start wuauserv
+    virtualbox-iso: The Windows Update service is starting.
+    virtualbox-iso: The Windows Update service was started successfully.
+    virtualbox-iso:
+    virtualbox-iso:
+    virtualbox-iso: C:\Users\vagrant>if "virtualbox-iso" NEQ "hyperv-iso" (
+    virtualbox-iso: cmd /c C:\Windows\Temp\ultradefrag-portable-6.1.0.amd64\udefrag.exe --optimize --repeat C:
+    virtualbox-iso:  cmd /c C:\Windows\System32\reg.exe ADD HKCU\Software\Sysinternals\SDelete /v EulaAccepted /t REG_DWORD /d 1 /f
+    virtualbox-iso:  cmd /c C:\Windows\Temp\sdelete.exe -q -z C:
+    virtualbox-iso: )
+    virtualbox-iso: UltraDefrag 6.1.0, Copyright (c) UltraDefrag Development Team, 2007-2013.
+    virtualbox-iso: UltraDefrag comes with ABSOLUTELY NO WARRANTY. This is free software,
+    virtualbox-iso: and you are welcome to redistribute it under certain conditions.
+    virtualbox-iso:
+    virtualbox-iso: C: defrag:   100.00% complete, 7 passes needed, fragmented/total = 42/184413
+    virtualbox-iso: The operation completed successfully.
+    virtualbox-iso:
+    virtualbox-iso: SDelete - Secure Delete v1.61
+    virtualbox-iso: Copyright (C) 1999-2012 Mark Russinovich
+    virtualbox-iso: Sysinternals - www.sysinternals.com
+    virtualbox-iso:
+    virtualbox-iso: SDelete is set for 1 pass.
+    virtualbox-iso: Free space cleaned on C:\
+    virtualbox-iso: 1 drives zapped
+    virtualbox-iso:
+==> virtualbox-iso: Gracefully halting virtual machine...
+    virtualbox-iso: Removing floppy drive...
+==> virtualbox-iso: Preparing to export machine...
+    virtualbox-iso: Deleting forwarded port mapping for the communicator (SSH, WinRM, etc) (host port 2292)
+==> virtualbox-iso: Exporting virtual machine...
+    virtualbox-iso: Executing: export windows_10 --output output-virtualbox-iso/windows_10.ovf
+==> virtualbox-iso: Deregistering and deleting VM...
+==> virtualbox-iso: Running post-processor: vagrant
+==> virtualbox-iso (vagrant): Creating Vagrant box for 'virtualbox' provider
+    virtualbox-iso (vagrant): Copying from artifact: output-virtualbox-iso/windows_10-disk001.vmdk
+    virtualbox-iso (vagrant): Copying from artifact: output-virtualbox-iso/windows_10.ovf
+    virtualbox-iso (vagrant): Renaming the OVF to box.ovf...
+    virtualbox-iso (vagrant): Using custom Vagrantfile: vagrantfile-windows_10.template
+    virtualbox-iso (vagrant): Compressing: Vagrantfile
+    virtualbox-iso (vagrant): Compressing: box.ovf
+    virtualbox-iso (vagrant): Compressing: metadata.json
+    virtualbox-iso (vagrant): Compressing: windows_10-disk001.vmdk
+Build 'virtualbox-iso' finished.
