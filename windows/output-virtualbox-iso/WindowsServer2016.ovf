@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<Envelope ovf:version="1.0" xml:lang="en-US" xmlns="http://schemas.dmtf.org/ovf/envelope/1" xmlns:ovf="http://schemas.dmtf.org/ovf/envelope/1" xmlns:rasd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_ResourceAllocationSettingData" xmlns:vssd="http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2/CIM_VirtualSystemSettingData" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:vbox="http://www.virtualbox.org/ovf/machine">
+  <References>
+    <File ovf:id="file1" ovf:href="WindowsServer2016-disk001.vmdk"/>
+  </References>
+  <DiskSection>
+    <Info>List of the virtual disks used in the package</Info>
+    <Disk ovf:capacity="64424509440" ovf:diskId="vmdisk1" ovf:fileRef="file1" ovf:format="http://www.vmware.com/interfaces/specifications/vmdk.html#streamOptimized" vbox:uuid="cc368a3d-e02a-449f-bcef-4a5893ded14f"/>
+  </DiskSection>
+  <NetworkSection>
+    <Info>Logical networks used in the package</Info>
+    <Network ovf:name="NAT">
+      <Description>Logical network used by this appliance.</Description>
+    </Network>
+  </NetworkSection>
+  <VirtualSystem ovf:id="WindowsServer2016">
+    <Info>A virtual machine</Info>
+    <OperatingSystemSection ovf:id="102">
+      <Info>The kind of installed guest operating system</Info>
+      <Description>Other_64</Description>
+      <vbox:OSType ovf:required="false">Windows2016_64</vbox:OSType>
+    </OperatingSystemSection>
+    <VirtualHardwareSection>
+      <Info>Virtual hardware requirements for a virtual machine</Info>
+      <System>
+        <vssd:ElementName>Virtual Hardware Family</vssd:ElementName>
+        <vssd:InstanceID>0</vssd:InstanceID>
+        <vssd:VirtualSystemIdentifier>WindowsServer2016</vssd:VirtualSystemIdentifier>
+        <vssd:VirtualSystemType>virtualbox-2.2</vssd:VirtualSystemType>
+      </System>
+      <Item>
+        <rasd:Caption>2 virtual CPU</rasd:Caption>
+        <rasd:Description>Number of virtual CPUs</rasd:Description>
+        <rasd:ElementName>2 virtual CPU</rasd:ElementName>
+        <rasd:InstanceID>1</rasd:InstanceID>
+        <rasd:ResourceType>3</rasd:ResourceType>
+        <rasd:VirtualQuantity>2</rasd:VirtualQuantity>
+      </Item>
+      <Item>
+        <rasd:AllocationUnits>MegaBytes</rasd:AllocationUnits>
+        <rasd:Caption>2048 MB of memory</rasd:Caption>
+        <rasd:Description>Memory Size</rasd:Description>
+        <rasd:ElementName>2048 MB of memory</rasd:ElementName>
+        <rasd:InstanceID>2</rasd:InstanceID>
+        <rasd:ResourceType>4</rasd:ResourceType>
+        <rasd:VirtualQuantity>2048</rasd:VirtualQuantity>
+      </Item>
+      <Item>
+        <rasd:Address>0</rasd:Address>
+        <rasd:Caption>ideController0</rasd:Caption>
+        <rasd:Description>IDE Controller</rasd:Description>
+        <rasd:ElementName>ideController0</rasd:ElementName>
+        <rasd:InstanceID>3</rasd:InstanceID>
+        <rasd:ResourceSubType>PIIX4</rasd:ResourceSubType>
+        <rasd:ResourceType>5</rasd:ResourceType>
+      </Item>
+      <Item>
+        <rasd:Address>1</rasd:Address>
+        <rasd:Caption>ideController1</rasd:Caption>
+        <rasd:Description>IDE Controller</rasd:Description>
+        <rasd:ElementName>ideController1</rasd:ElementName>
+        <rasd:InstanceID>4</rasd:InstanceID>
+        <rasd:ResourceSubType>PIIX4</rasd:ResourceSubType>
+        <rasd:ResourceType>5</rasd:ResourceType>
+      </Item>
+      <Item>
+        <rasd:AddressOnParent>0</rasd:AddressOnParent>
+        <rasd:Caption>disk1</rasd:Caption>
+        <rasd:Description>Disk Image</rasd:Description>
+        <rasd:ElementName>disk1</rasd:ElementName>
+        <rasd:HostResource>/disk/vmdisk1</rasd:HostResource>
+        <rasd:InstanceID>5</rasd:InstanceID>
+        <rasd:Parent>3</rasd:Parent>
+        <rasd:ResourceType>17</rasd:ResourceType>
+      </Item>
+      <Item>
+        <rasd:AutomaticAllocation>true</rasd:AutomaticAllocation>
+        <rasd:Caption>Ethernet adapter on 'NAT'</rasd:Caption>
+        <rasd:Connection>NAT</rasd:Connection>
+        <rasd:ElementName>Ethernet adapter on 'NAT'</rasd:ElementName>
+        <rasd:InstanceID>6</rasd:InstanceID>
+        <rasd:ResourceSubType>E1000</rasd:ResourceSubType>
+        <rasd:ResourceType>10</rasd:ResourceType>
+      </Item>
+    </VirtualHardwareSection>
+    <vbox:Machine ovf:required="false" version="1.15-macosx" uuid="{ccf3f1b5-a7e4-4401-898a-88cf2bd8c785}" name="WindowsServer2016" OSType="Windows2016_64" snapshotFolder="Snapshots" lastStateChange="2019-03-26T13:07:51Z">
+      <ovf:Info>Complete VirtualBox machine configuration in VirtualBox format</ovf:Info>
+      <ExtraData>
+        <ExtraDataItem name="GUI/LastGuestSizeHint" value="800,600"/>
+        <ExtraDataItem name="GUI/LastNormalWindowPosition" value="0,102,800,621"/>
+      </ExtraData>
+      <Hardware>
+        <CPU count="2">
+          <PAE enabled="true"/>
+          <LongMode enabled="true"/>
+          <HardwareVirtExLargePages enabled="true"/>
+        </CPU>
+        <Memory RAMSize="2048"/>
+        <Paravirt provider="Default"/>
+        <Boot>
+          <Order position="1" device="HardDisk"/>
+          <Order position="2" device="DVD"/>
+          <Order position="3" device="None"/>
+          <Order position="4" device="None"/>
+        </Boot>
+        <RemoteDisplay>
+          <VRDEProperties>
+            <Property name="TCP/Address" value="127.0.0.1"/>
+            <Property name="TCP/Ports" value="5971"/>
+          </VRDEProperties>
+        </RemoteDisplay>
+        <BIOS>
+          <IOAPIC enabled="true"/>
+        </BIOS>
+        <Network>
+          <Adapter slot="0" enabled="true" MACAddress="080027ADE2BE" cable="true" type="82540EM">
+            <NAT/>
+          </Adapter>
+        </Network>
+        <AudioAdapter driver="CoreAudio" enabled="false" enabledIn="false" enabledOut="false"/>
+        <GuestProperties>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxControl.exe" value="5.2.26r128414" timestamp="1553604388521666000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxCredProv.dll" value="-" timestamp="1553604388639088000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxDisp.dll" value="-" timestamp="1553604388544373000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxGINA.dll" value="-" timestamp="1553604388638381000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxGuest.sys" value="5.2.26r128414" timestamp="1553604388687631000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxHook.dll" value="5.2.26r128414" timestamp="1553604388543032000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxMRXNP.dll" value="5.2.26r128414" timestamp="1553604388637796000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxMouse.sys" value="5.2.26r128414" timestamp="1553604388689083000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGL.dll" value="-" timestamp="1553604388646431000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLarrayspu.dll" value="-" timestamp="1553604388642951000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLcrutil.dll" value="-" timestamp="1553604388643765000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLerrorspu.dll" value="-" timestamp="1553604388644393000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLfeedbackspu.dll" value="-" timestamp="1553604388645987000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLpackspu.dll" value="-" timestamp="1553604388644916000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxOGLpassthroughspu.dll" value="-" timestamp="1553604388645445000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxSF.sys" value="5.2.26r128414" timestamp="1553604388690275000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxService.exe" value="5.2.26r128414" timestamp="1553604388594325000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxTray.exe" value="5.2.26r128414" timestamp="1553604388593220000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Components/VBoxVideo.sys" value="-" timestamp="1553604388690972000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/HostVerLastChecked" value="5.2.22" timestamp="1553604451732363000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/InstallDir" value="C:/Program Files/Oracle/VirtualBox Guest Additions" timestamp="1553604388421929000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Revision" value="128414" timestamp="1553604388421625000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/Version" value="5.2.26" timestamp="1553604388421249000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestAdd/VersionExt" value="5.2.26" timestamp="1553604388421327000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestInfo/OS/Product" value="Windows 2016" timestamp="1553604388417600000" flags=""/>
+          <GuestProperty name="/VirtualBox/GuestInfo/OS/Release" value="10.0.14393" timestamp="1553604388419204000" flags=""/>
+          <GuestProperty name="/VirtualBox/HostInfo/GUI/LanguageID" value="en_US" timestamp="1553605672236700000" flags=""/>
+        </GuestProperties>
+      </Hardware>
+      <StorageControllers>
+        <StorageController name="IDE Controller" type="PIIX4" PortCount="2" useHostIOCache="true" Bootable="true">
+          <AttachedDevice type="HardDisk" hotpluggable="false" port="0" device="0">
+            <Image uuid="{cc368a3d-e02a-449f-bcef-4a5893ded14f}"/>
+          </AttachedDevice>
+        </StorageController>
+      </StorageControllers>
+    </vbox:Machine>
+  </VirtualSystem>
+</Envelope>

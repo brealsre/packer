@@ -1,0 +1,163 @@
+{
+  "builders": [
+    {
+      "boot_wait": "2m",
+      "communicator": "winrm",
+      "cpus": 2,
+      "disk_adapter_type": "lsisas1068",
+      "disk_size": "{{user `disk_size`}}",
+      "disk_type_id": "{{user `disk_type_id`}}",
+      "floppy_files": [
+        "{{user `autounattend`}}",
+        "./scripts/disable-screensaver.ps1",
+        "./scripts/disable-winrm.ps1",
+        "./scripts/enable-winrm.ps1",
+        "./scripts/microsoft-updates.bat",
+        "./scripts/unattend.xml",
+        "./scripts/sysprep.bat",
+        "./scripts/win-updates.ps1"
+      ],
+      "guest_os_type": "windows9srv-64",
+      "headless": "{{user `headless`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "memory": 2048,
+      "shutdown_command": "a:/sysprep.bat",
+      "type": "vmware-iso",
+      "version": 14,
+      "vm_name": "WindowsServer2016",
+      "vmx_data": {
+        "RemoteDisplay.vnc.enabled": "false",
+        "RemoteDisplay.vnc.port": "5900"
+      },
+      "vmx_remove_ethernet_interfaces": true,
+      "vnc_port_max": 5980,
+      "vnc_port_min": 5900,
+      "winrm_password": "vagrant",
+      "winrm_timeout": "{{user `winrm_timeout`}}",
+      "winrm_username": "vagrant"
+    },
+    {
+      "boot_wait": "2m",
+      "communicator": "winrm",
+      "cpus": 2,
+      "disk_size": "{{user `disk_size`}}",
+      "floppy_files": [
+        "{{user `autounattend`}}",
+        "./scripts/disable-screensaver.ps1",
+        "./scripts/disable-winrm.ps1",
+        "./scripts/enable-winrm.ps1",
+        "./scripts/microsoft-updates.bat",
+        "./scripts/win-updates.ps1",
+        "./scripts/unattend.xml",
+        "./scripts/sysprep.bat"
+      ],
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Windows2016_64",
+      "headless": "{{user `headless`}}",
+      "iso_checksum": "{{user `iso_checksum`}}",
+      "iso_checksum_type": "{{user `iso_checksum_type`}}",
+      "iso_url": "{{user `iso_url`}}",
+      "memory": 2048,
+      "shutdown_command": "a:/sysprep.bat",
+      "type": "virtualbox-iso",
+      "vm_name": "WindowsServer2016",
+      "winrm_password": "vagrant",
+      "winrm_timeout": "{{user `winrm_timeout`}}",
+      "winrm_username": "vagrant"
+    },
+    {
+      "type": "azure-arm",
+  
+      "client_id": "{{ user `azure_client_id` }}",
+      "client_secret": "{{ user `azure_client_secret` }}",
+      "tenant_id": "{{ user `azure_tenant_id` }}",
+      "subscription_id": "{{ user `azure_subscription_id` }}",
+  
+      "managed_image_resource_group_name": "myPackerGroup",
+      "managed_image_name": "WindowsServer2016Image_{{isotime \"2006-01-02-03-04-05\"}}",
+  
+      "os_type": "Windows",
+      "image_publisher": "MicrosoftWindowsServer",
+      "image_offer": "WindowsServer",
+      "image_sku": "2016-Datacenter",
+  
+      "communicator": "winrm",
+      "winrm_use_ssl": true,
+      "winrm_insecure": true,
+      "winrm_timeout": "3m",
+      "winrm_username": "packer",
+  
+      "azure_tags": {
+          "dept": "Engineering",
+          "task": "Image deployment"
+      },
+  
+      "location": "East US",
+      "vm_size": "Standard_DS2_v2"
+    }
+  ],
+  "provisioners": [
+    {
+      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "scripts": [
+        "./scripts/vm-guest-tools.bat",
+        "./scripts/enable-rdp.bat"
+      ],
+      "type": "windows-shell",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "scripts": [
+        "./scripts/debloat-windows.ps1"
+      ],
+      "type": "powershell",
+      "only": ["virtualbox-iso"]
+
+    },
+    {
+      "restart_timeout": "{{user `restart_timeout`}}",
+      "type": "windows-restart",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "execute_command": "{{ .Vars }} cmd /c \"{{ .Path }}\"",
+      "scripts": [
+        "./scripts/pin-powershell.bat",
+        "./scripts/set-winrm-automatic.bat",
+        "./scripts/uac-enable.bat",
+        "./scripts/compile-dotnet-assemblies.bat",
+        "./scripts/dis-updates.bat",
+        "./scripts/compact.bat"
+      ],
+      "type": "windows-shell",
+      "only": ["virtualbox-iso"]
+    },
+    {
+      "type": "powershell",
+      "inline": [
+        "Add-WindowsFeature Web-Server",
+        "& $env:SystemRoot\\System32\\Sysprep\\Sysprep.exe /oobe /generalize /quiet /quit",
+        "while($true) { $imageState = Get-ItemProperty HKLM:\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Setup\\State | Select ImageState; if($imageState.ImageState -ne 'IMAGE_STATE_GENERALIZE_RESEAL_TO_OOBE') { Write-Output $imageState.ImageState; Start-Sleep -s 10  } else { break } }"
+      ],
+      "only": ["azure-arm"]
+    }
+  ],
+  "variables": {
+    "autounattend": "./answer_files/2016/Autounattend.xml",
+    "disk_size": "61440",
+    "disk_type_id": "1",
+    "headless": "false",
+    "hyperv_switchname": "{{env `hyperv_switchname`}}",
+    "iso_checksum": "70721288BBCDFE3239D8F8C0FAE55F1F",
+    "iso_checksum_type": "md5",
+    "iso_url": "https://software-download.microsoft.com/download/pr/Windows_Server_2016_Datacenter_EVAL_en-us_14393_refresh.ISO",
+    "restart_timeout": "5m",
+    "winrm_timeout": "4h",
+    "azure_client_id": "{{ env `ARM_CLIENT_ID` }}",
+    "azure_client_secret": "{{ env `ARM_CLIENT_SECRET` }}",
+    "azure_tenant_id": "{{ env `ARM_TENANT_ID` }}",
+    "azure_subscription_id": "{{ env `ARM_SUBSCRIPTION_ID` }}"
+  }
+}
