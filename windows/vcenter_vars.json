@@ -1,0 +1,19 @@
+{
+	"vc_host": "",
+	"vc_insecure_connection": "true",
+        "vc_cluster": "",
+        "vc_resourcepool": "",
+        "vc_datacenter": "",
+        "vc_network": "",
+        "vc_storage": "",
+        "vc_vm_folder": "",
+	"vc_cpu_hotplug": "true",
+	"vc_cpu_limit": "-1",
+        "vc_ram_hot_plug": "true",
+        "vc_ram_reserve_all": "false",
+        "vc_network_card": "vmxnet3",
+        "vc_disk_controller_type": "pvscsi",
+        "vc_disk_thin_provisioned": "false",
+        "vc_boot_order": "disk,cdrom",
+        "vc_iso_datastore": ""
+}
