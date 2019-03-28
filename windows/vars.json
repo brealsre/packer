@@ -1,0 +1,12 @@
+{
+	"vc_cpu_cores":			"2",
+	"vc_ram_mb":			"8192",
+	"vc_disk_size":			"40960",
+	"vc_vmware_guest_os":	"windows9Server64Guest",
+	"vc_iso_path":			"windows",
+	"vc_iso_file":			"SW_DVD9_Win_Svr_STD_Core_and_DataCtr_Core_2016_64Bit_English_-3_MLF_X21-30350.ISO",
+	"vc_convert_to_template": "true",
+	"os_communicator":		"winrm",
+	"os_winrm_user":		"packer",
+	"os_winrm_password":	"packer"
+}
