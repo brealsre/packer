@@ -1,0 +1,41 @@
+{
+	"builders": [
+		{
+		"type": 			"vsphere-iso",
+		"vcenter_server":		"{{ user `vc_host` }}",
+		"username":	 		"{{ user `vc_user` }}",
+		"password":			"{{ user `vc_password` }}",
+		"insecure_connection":		"{{ user `vc_insecure_connection` }}",
+		"datacenter": 			"{{ user `vc_datacenter` }}",
+		"cluster": 			"{{ user `vc_cluster` }}",
+		"folder": 			"{{ user `vc_vm_folder` }}",
+		"resource_pool": 		"{{ user `vc_resourcepool` }}", 
+		"network": 			"{{ user `vc_network` }}",
+		"datastore": 			"{{ user `vc_storage` }}",
+		"vm_name": 			"{{ user `vc_vm_name` }}",
+		"CPUs":		 		"{{ user `vc_cpu_cores` }}",
+		"CPU_hot_plug": 		"{{ user `vc_cpu_hotplug` }}",
+		"CPU_limit":			"{{ user `vc_cpu_limit` }}",
+		"RAM":				"{{ user `vc_ram_mb` }}",
+		"RAM_reserve_all": 		"{{ user `vc_ram_reserve_all` }}", 
+		"RAM_hot_plug": 		"{{ user `vc_ram_hot_plug` }}",
+		"network_card": 		"{{ user `vc_network_card` }}",
+		"disk_size":			"{{ user `vc_disk_size` }}",
+		"disk_thin_provisioned":	"{{ user `vc_disk_thin_provisioned` }}",
+		"guest_os_type":		"{{ user `vc_vmware_guest_os` }}", 
+		"iso_paths": 			[ "[{{ user `vc_iso_datastore` }}] {{user `vc_iso_path` }}/{{ user `vc_iso_file` }}" ],
+		"boot_order": 			"{{ user `vc_boot_order` }}",
+		"communicator":			"{{ user `os_communicator` }}",
+		"winrm_username": 		"{{ user `os_winrm_user` }}",
+		"winrm_password": 		"{{ user `os_winrm_password` }}",
+		"convert_to_template": 		"{{ user `vc_convert_to_template` }}",
+                "floppy_files": [
+			"{{ user `build_home` }}/answer-files/2016/autounattend.xml",
+			"{{ user `build_home` }}/scripts/disable-winrm.ps1",
+			"{{ user `build_home` }}/scripts/enable-winrm.ps1",
+			"{{ user `build_home` }}/scripts/configure-network.ps1",
+                        "{{ user `build_home` }}/scripts/unattend.xml"
+		]
+		}
+	]
+}
